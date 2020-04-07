@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background_image"
+    android:background="@drawable/books_background"
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+
         tools:context=".MainActivity"
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="-98dp"
@@ -54,24 +54,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="311dp"
-                android:layout_height="147dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="87dp"
-                android:layout_marginEnd="50dp"
-                android:background="#99141414"
-                android:fontFamily="sans-serif-black"
-                android:padding="15dp"
-                android:text="   Take a photo of          a  book  and get  it's reviews and ratings"
-                android:textAllCaps="false"
-                android:textColor="#DDC8B7"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-            <TextView
                 android:id="@+id/editText"
                 android:layout_width="408dp"
                 android:layout_height="69dp"
@@ -89,6 +71,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="311dp"
+                android:layout_height="147dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="87dp"
+                android:layout_marginEnd="50dp"
+                android:background="#99141414"
+                android:fontFamily="sans-serif-black"
+                android:padding="15dp"
+                android:text="   Take a photo of          a  book  and get  it's reviews and ratings"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
