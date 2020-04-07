@@ -4,58 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background_image">
+    android:background="@drawable/main_background_image"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="231dp"
-        android:layout_height="64dp"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="-98dp"
+        tools:openDrawer="end">
 
-        android:background="@drawable/custom_button"
-        android:hint="Click to take a picture"
-        android:textColor="#899597"
-        android:textColorHint="#CDC6C0"
-        android:textIsSelectable="false"
-        android:textSelectHandle="@android:drawable/ic_menu_camera"
-        android:textSelectHandleLeft="@android:drawable/ic_menu_camera"
-        android:textSize="23sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="408dp"
-        android:layout_height="69dp"
-        android:background="#99141414"
-        android:ems="10"
-        android:fontFamily="sans-serif-black"
-        android:inputType="textPersonName"
-        android:padding="16dp"
-        android:text="Welcome to Reviewinator"
-        android:textColor="#FBE9DB"
-        android:textSize="32sp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="129dp" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/c1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="311dp"
-        android:layout_height="147dp"
-        android:layout_marginTop="20dp"
-        android:background="#99141414"
-        android:fontFamily="sans-serif-black"
-        android:padding="15dp"
-        android:text="   Take a photo of          a  book  and get  it's reviews and ratings"
-        android:textAllCaps="false"
-        android:textColor="#DDC8B7"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="74dp"
+                android:layout_marginEnd="96dp"
+                android:background="@drawable/custom_button"
+                android:hint="Click to take a picture"
+                android:textColor="#899597"
+                android:textColorHint="#CDC6C0"
+                android:textIsSelectable="false"
+                android:textSelectHandle="@android:drawable/ic_menu_camera"
+                android:textSelectHandleLeft="@android:drawable/ic_menu_camera"
+                android:textSize="23sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="311dp"
+                android:layout_height="147dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="87dp"
+                android:layout_marginEnd="50dp"
+                android:background="#99141414"
+                android:fontFamily="sans-serif-black"
+                android:padding="15dp"
+                android:text="   Take a photo of          a  book  and get  it's reviews and ratings"
+                android:textAllCaps="false"
+                android:textColor="#DDC8B7"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="408dp"
+                android:layout_height="69dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="33dp"
+                android:background="#99141414"
+                android:ems="10"
+                android:fontFamily="sans-serif-black"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:text="Welcome to Reviewinator"
+                android:textColor="#FBE9DB"
+                android:textSize="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/header"
+
+            app:itemTextColor="@color/c2"
+            app:menu="@menu/menu_item" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
