@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scaleType="fitXY"
     android:background="@drawable/books_background"
     tools:context=".MainActivity">
 
@@ -11,7 +12,6 @@
         android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         tools:context=".MainActivity"
         tools:layout_editor_absoluteX="-16dp"
         tools:layout_editor_absoluteY="-98dp"
@@ -25,7 +25,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/c1"
+                android:background="@color/alb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,6 @@
                 android:background="#99141414"
                 android:ems="10"
                 android:fontFamily="sans-serif-black"
-                android:inputType="textPersonName"
                 android:padding="16dp"
                 android:text="Welcome to Reviewinator"
                 android:textColor="#FBE9DB"
