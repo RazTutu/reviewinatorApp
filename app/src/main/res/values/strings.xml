@@ -2,5 +2,6 @@
     <string name="app_name">NavigationDrawer</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
+    <string name="post_request">POST_REQUEST</string>
 </resources>
 
