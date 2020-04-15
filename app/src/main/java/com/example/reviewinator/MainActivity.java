@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -115,7 +116,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == CAMERA_REQUEST_CODE) {
             if(resultCode==Activity.RESULT_OK){
                 File f=new File(currentPhotoPath);
-                selectedImage.setImageURI(Uri.fromFile(f));
+                Uri contentUri=Uri.fromFile(f);
+                selectedImage.setImageURI(contentUri);
+                Log.d("IMAGINE","Absolute URL of Image is " + contentUri);
+                Intent mediaScanIntent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                mediaScanIntent.setData(contentUri);
+                this.sendBroadcast(mediaScanIntent);
+
             }
 
         }
@@ -126,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
