@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-98dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-126dp"
         tools:openDrawer="end">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,12 +34,13 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="0dp"
-                android:layout_height="64dp"
+                android:layout_width="143dp"
+                android:layout_height="73dp"
 
-                android:layout_marginStart="96dp"
-                android:layout_marginTop="72dp"
-                android:layout_marginEnd="96dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="27dp"
                 android:background="@drawable/custom_button"
                 android:hint="Click to take a picture"
                 android:textColor="#899597"
@@ -49,10 +50,10 @@
                 android:textSelectHandleLeft="@android:drawable/ic_menu_camera"
                 android:textSize="23sp"
                 android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintStart_toEndOf="@+id/btnGallery"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/editText"
@@ -92,29 +93,35 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="206dp"
-                android:layout_height="279dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="100dp"
+                android:layout_width="180dp"
+                android:layout_height="223dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.557"
-                app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/button"
-                app:layout_constraintVertical_bias="0.43"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintVertical_bias="0.0"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <Button
                 android:id="@+id/btnGallery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="55dp"
-                android:layout_marginEnd="89dp"
+                android:layout_width="143dp"
+                android:layout_height="73dp"
+
+
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="27dp"
+                android:background="@drawable/custom_button"
                 android:text="Gallery"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                android:textColor="#CDC6C0"
+                android:textSize="26sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button"
+                app:layout_constraintHorizontal_bias="0.51"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
