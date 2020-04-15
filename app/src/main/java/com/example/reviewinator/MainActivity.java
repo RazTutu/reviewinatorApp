@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static final int CAMERA_REQUEST_CODE = 102;
     private static final int CAMERA_PERM_CODE = 101;
+    public static final int GALLERY_REQUEST_CODE = 105;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -69,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"galerie selectata", Toast.LENGTH_SHORT).show();
+                Intent gallery=new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, GALLERY_REQUEST_CODE);
             }
         });
 
@@ -122,10 +126,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent mediaScanIntent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 mediaScanIntent.setData(contentUri);
                 this.sendBroadcast(mediaScanIntent);
+            }
+
+        }
+
+        if (requestCode == GALLERY_REQUEST_CODE) {
+            if(resultCode==Activity.RESULT_OK){
+               Uri contentUri=data.getData();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
+                Log.d("GALLERY","onActivityResult: Gallery Image Uri: " +imageFileName);
+                selectedImage.setImageURI(contentUri);
 
             }
 
         }
+    }
+
+    private String getFileExt(Uri contentUri) {
+        ContentResolver c=getContentResolver();
+        MimeTypeMap mime=MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(c.getType(contentUri));
     }
 
 
