@@ -25,25 +25,23 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/alb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="143dp"
+                android:layout_width="144dp"
                 android:layout_height="73dp"
 
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="28dp"
-                android:layout_marginBottom="27dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/custom_button"
-                android:hint="Click to take a picture"
-                android:textColor="#899597"
+                android:text="Camera"
+                android:textColor="#CDC6C0"
                 android:textColorHint="#CDC6C0"
                 android:textIsSelectable="false"
                 android:textSelectHandle="@android:drawable/ic_menu_camera"
@@ -51,9 +49,7 @@
                 android:textSize="23sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnGallery"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/editText"
@@ -106,22 +102,15 @@
                 android:id="@+id/btnGallery"
                 android:layout_width="143dp"
                 android:layout_height="73dp"
-
-
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="26dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="27dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/custom_button"
                 android:text="Gallery"
                 android:textColor="#CDC6C0"
                 android:textSize="26sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView

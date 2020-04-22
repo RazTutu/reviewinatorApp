@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NavigationDrawer</string>
+    <string name="app_name">Reviewinator</string>
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
 </resources>

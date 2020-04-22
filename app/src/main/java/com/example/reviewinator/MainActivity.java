@@ -47,10 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
-    Button button,btnGallery;
+    Button button, btnGallery;
     ImageView selectedImage;
     String currentPhotoPath;
-
 
 
     @SuppressLint("RestrictedApi")
@@ -64,15 +63,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigationView);
-        button=findViewById(R.id.button);
-        btnGallery=findViewById(R.id.btnGallery);
-        selectedImage=findViewById(R.id.imageView);
+        button = findViewById(R.id.button);
+        btnGallery = findViewById(R.id.btnGallery);
+        selectedImage = findViewById(R.id.imageView);
 
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent gallery=new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(gallery, GALLERY_REQUEST_CODE);
             }
         });
@@ -95,57 +94,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void askCameraPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},CAMERA_PERM_CODE);
-        }else{
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
             dispatchTakePictureIntent();
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==CAMERA_PERM_CODE){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == CAMERA_PERM_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 dispatchTakePictureIntent();
-            }else{
-                Toast.makeText(this,"Camera Permission is Required to Use Camera.",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Camera Permission is Required to Use Camera.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
+//if (requestCode == GALLERY_REQUEST_CODE) {
+//        if(resultCode==Activity.RESULT_OK){
+//            Uri contentUri=data.getData();
+//            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//            String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
+//            Log.d("GALLERY","onActivityResult: Gallery Image Uri: " +imageFileName);
+//            selectedImage.setImageURI(contentUri);
+//
+//        }
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
-            if(resultCode==Activity.RESULT_OK){
-                File f=new File(currentPhotoPath);
-                Uri contentUri=Uri.fromFile(f);
-                selectedImage.setImageURI(contentUri);
-                Log.d("IMAGINE","Absolute URL of Image is " + contentUri);
-                Intent mediaScanIntent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                mediaScanIntent.setData(contentUri);
-                this.sendBroadcast(mediaScanIntent);
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                selectedImage.setImageURI(Uri.fromFile(f));
             }
-
-        }
-
-        if (requestCode == GALLERY_REQUEST_CODE) {
-            if(resultCode==Activity.RESULT_OK){
-               Uri contentUri=data.getData();
+        } else if (requestCode == GALLERY_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri contentUri = data.getData();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
-                Log.d("GALLERY","onActivityResult: Gallery Image Uri: " +imageFileName);
+                Log.d("GALLERY", "onActivityResult: Gallery Image Uri: " + imageFileName);
                 selectedImage.setImageURI(contentUri);
-
             }
-
         }
     }
 
     private String getFileExt(Uri contentUri) {
-        ContentResolver c=getContentResolver();
-        MimeTypeMap mime=MimeTypeMap.getSingleton();
+        ContentResolver c = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(c.getType(contentUri));
     }
 
@@ -154,8 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-//        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File storageDir=Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -166,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
 
 
     private void dispatchTakePictureIntent() {
