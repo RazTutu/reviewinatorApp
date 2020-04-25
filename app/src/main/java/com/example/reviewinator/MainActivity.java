@@ -60,8 +60,11 @@ import java.io.UnsupportedEncodingException;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import org.apache.commons.text.StringEscapeUtils;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String currentPhotoPath;
 
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-
-
 
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +123,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void postRequest(){
         try {
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
+            RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+            //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("name", "ZEUl");
             jsonBody.put("country", "MAXUT");
@@ -135,7 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Log.i("VOLLEY", response);
+                    //Log.i("VOLLEY", response.toString());
+                    System.out.println(StringEscapeUtils.unescapeHtml4(response));
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -150,23 +152,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 @Override
                 public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                        return null;
-                    }
+                    return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
                 }
 
                 @Override
                 protected Response<String> parseNetworkResponse(NetworkResponse response) {
                     String responseString = "";
                     if (response != null) {
-                        responseString = String.valueOf(response.statusCode);
-                        // can get more details such as response.headers
+                        responseString = new String(response.data);
                     }
+                    assert response != null;
                     return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
+
             };
 
             requestQueue.add(stringRequest);
