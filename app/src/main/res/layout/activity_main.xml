@@ -38,7 +38,7 @@
                 android:layout_height="73dp"
 
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/custom_button"
                 android:text="Camera"
                 android:textColor="#CDC6C0"
@@ -56,7 +56,7 @@
                 android:layout_width="408dp"
                 android:layout_height="69dp"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="8dp"
                 android:background="#99141414"
                 android:ems="10"
                 android:fontFamily="sans-serif-black"
@@ -65,6 +65,7 @@
                 android:textColor="#FBE9DB"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:ignore="MissingConstraints" />
@@ -88,26 +89,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/editText" />
 
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:text="@string/post_request"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
-
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="180dp"
-                android:layout_height="223dp"
+                android:layout_width="158dp"
+                android:layout_height="207dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.061"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.096"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <Button
@@ -115,7 +106,7 @@
                 android:layout_width="143dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/custom_button"
                 android:text="Gallery"
                 android:textColor="#CDC6C0"
@@ -123,6 +114,15 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/testulet"
+                android:layout_width="157dp"
+                android:layout_height="195dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginBottom="45dp"
+                app:layout_constraintBottom_toTopOf="@+id/button"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView

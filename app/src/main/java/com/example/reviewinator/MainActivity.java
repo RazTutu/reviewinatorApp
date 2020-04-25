@@ -16,7 +16,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -24,6 +23,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,8 +32,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -46,16 +46,17 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.reviewinator.R;
 import com.google.android.material.navigation.NavigationView;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button button, btnGallery;
     ImageView selectedImage;
     String currentPhotoPath;
-
+    TextView txtTest;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
         selectedImage = findViewById(R.id.imageView);
+        txtTest=findViewById(R.id.testulet);
 
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
@@ -117,13 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        Button post_button = findViewById(R.id.button2);
-        post_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postRequest();
-            }
-        });
     }
 
     private void postRequest(){
@@ -131,10 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("name", "Radu");
-            jsonBody.put("country", "Romania");
-            jsonBody.put("city", "TG");
-            jsonBody.put("plainCapacity", "10000000");
+            jsonBody.put("name", "ZEU");
+            jsonBody.put("country", "MAXUT");
+            jsonBody.put("city", "DELENI");
+            jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -198,17 +193,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-//if (requestCode == GALLERY_REQUEST_CODE) {
-//        if(resultCode==Activity.RESULT_OK){
-//            Uri contentUri=data.getData();
-//            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//            String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
-//            Log.d("GALLERY","onActivityResult: Gallery Image Uri: " +imageFileName);
-//            selectedImage.setImageURI(contentUri);
-//
-//        }
-//
-//    }
+
+
+    String encodeImage(String photoPath){
+        InputStream inputStream = null;//You can get an inputStream using any IO API
+        try {
+            inputStream = new FileInputStream(photoPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes;
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                output.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bytes = output.toByteArray();
+        String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+        return encodedString;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -217,6 +225,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
                 selectedImage.setImageURI(Uri.fromFile(f));
+
+                String encodedString=encodeImage(currentPhotoPath);
+
+                //debugging
+                int marime=encodedString.length();
+                Log.d("MARIME",Integer.toString(marime));
+                txtTest.setText(encodedString.substring(1000,1050));
+
+
+                postRequest();
+                Toast.makeText(MainActivity.this,"POST Request successful din camera", Toast.LENGTH_SHORT).show();
+
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -225,6 +245,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
                 Log.d("GALLERY", "onActivityResult: Gallery Image Uri: " + imageFileName);
                 selectedImage.setImageURI(contentUri);
+
+                // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
+                postRequest();
+                Toast.makeText(MainActivity.this,"POST Request successful din galerie", Toast.LENGTH_SHORT).show();
+
             }
         }
     }
