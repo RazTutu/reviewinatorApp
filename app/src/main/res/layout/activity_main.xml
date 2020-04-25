@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scaleType="fitXY"
-    android:background="@drawable/books_background"
+    android:background="@drawable/final_background_image_final"
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -32,76 +32,63 @@
                 tools:ignore="MissingConstraints"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="144dp"
-                android:layout_height="73dp"
-
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/custom_button"
-                android:text="Camera"
-                android:textColor="#CDC6C0"
-                android:textColorHint="#CDC6C0"
-                android:textIsSelectable="false"
-                android:textSelectHandle="@android:drawable/ic_menu_camera"
-                android:textSelectHandleLeft="@android:drawable/ic_menu_camera"
-                android:textSize="23sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
             <TextView
-                android:id="@+id/editText"
-                android:layout_width="408dp"
-                android:layout_height="69dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="8dp"
-                android:background="#99141414"
-                android:ems="10"
-                android:fontFamily="sans-serif-black"
-                android:padding="16dp"
-                android:text="Welcome to Reviewinator"
-                android:textColor="#FBE9DB"
-                android:textSize="32sp"
+                android:id="@+id/welcome_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="304dp"
+                android:layout_marginEnd="136dp"
+                android:fontFamily="@font/century_gothic"
+                android:text="Welcome to \nReviewinator"
+                android:textColor="#FFFFFF"
+                android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="311dp"
-                android:layout_height="147dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginEnd="50dp"
-                android:background="#99141414"
-                android:fontFamily="sans-serif-black"
-                android:padding="15dp"
-                android:text="   Take a photo of          a  book  and get  it's reviews and ratings"
-                android:textAllCaps="false"
+                android:layout_width="287dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginEnd="78dp"
+                android:fontFamily="@font/playfair_display"
+                android:text="Upload or take a photo of a book and get it's reviews and ratings."
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
-
+                app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
 
             <Button
                 android:id="@+id/btnGallery"
-                android:layout_width="143dp"
-                android:layout_height="73dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/custom_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="19dp"
+                android:width="163dp"
+
+                android:height="47dp"
+                android:background="#1CBEC8"
                 android:text="Gallery"
-                android:textColor="#CDC6C0"
-                android:textSize="26sp"
-                android:textStyle="bold|italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toStartOf="@+id/button"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:layout_marginEnd="28dp"
+                android:width="163dp"
+                android:height="47dp"
+                android:background="#1CC88A"
+                android:text="Camera"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
