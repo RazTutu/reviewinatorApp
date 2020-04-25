@@ -74,9 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     Button button, btnGallery;
-    ImageView selectedImage;
+
     String currentPhotoPath;
-    TextView txtTest;
+
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-        selectedImage = findViewById(R.id.imageView);
-        txtTest=findViewById(R.id.testulet);
+
+
 
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("name", "ZEU");
+            jsonBody.put("name", "ZEUl");
             jsonBody.put("country", "MAXUT");
             jsonBody.put("city", "DELENI");
             jsonBody.put("plainCapacity", "69");
@@ -223,15 +223,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
-                selectedImage.setImageURI(Uri.fromFile(f));
+
 
                 String encodedString=encodeImage(currentPhotoPath);
 
                 //debugging
                 int marime=encodedString.length();
                 Log.d("MARIME",Integer.toString(marime));
-                txtTest.setText(encodedString.substring(1000,1050));
 
 
                 postRequest();
@@ -244,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
                 Log.d("GALLERY", "onActivityResult: Gallery Image Uri: " + imageFileName);
-                selectedImage.setImageURI(contentUri);
+
 
                 // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
                 postRequest();
