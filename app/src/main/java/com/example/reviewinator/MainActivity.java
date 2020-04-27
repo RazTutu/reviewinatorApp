@@ -128,13 +128,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void postRequest(){
+    private void postRequest(String encodedImage){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("name", "ZEUl");
+            jsonBody.put("name", encodedImage.substring(1200,1220));
             jsonBody.put("country", "MAXUT");
             jsonBody.put("city", "DELENI");
             jsonBody.put("plainCapacity", "69");
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    String encodeImage(String photoPath){
+    public String encodeImage(String photoPath){
         InputStream inputStream = null;//You can get an inputStream using any IO API
         try {
             inputStream = new FileInputStream(photoPath);
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d("MARIME",Integer.toString(marime));
 
 
-                postRequest();
+                postRequest(encodedString);
                 Toast.makeText(MainActivity.this,"POST Request successful din camera", Toast.LENGTH_SHORT).show();
                 showResult();
             }
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
-                postRequest();
+               // postRequest();
                 Toast.makeText(MainActivity.this,"POST Request successful din galerie", Toast.LENGTH_SHORT).show();
                 showResult();
             }
