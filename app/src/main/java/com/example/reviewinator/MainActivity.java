@@ -131,13 +131,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage){
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
+            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+//            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("name", encodedImage.substring(1200,1220));
-            jsonBody.put("country", "MAXUT");
-            jsonBody.put("city", "DELENI");
-            jsonBody.put("plainCapacity", "69");
+            jsonBody.put("encoding",encodedImage);
+//            jsonBody.put("country", "MAXUT");
+//            jsonBody.put("city", "DELENI");
+//            jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
