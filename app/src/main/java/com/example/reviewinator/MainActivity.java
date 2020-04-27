@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int CAMERA_REQUEST_CODE = 102;
     private static final int CAMERA_PERM_CODE = 101;
     public static final int GALLERY_REQUEST_CODE = 105;
+    public static final String EXTRA_TEXT = "com.example.reviewinator.EXTRA_TEXT";
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -119,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+    }
+
+    private void showResult(){
+        Intent intent = new Intent(this, com.example.reviewinator.result.class);
+        intent.putExtra(EXTRA_TEXT,"Ana are mere.");
+        startActivity(intent);
     }
 
     private void postRequest(){
@@ -232,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 postRequest();
                 Toast.makeText(MainActivity.this,"POST Request successful din camera", Toast.LENGTH_SHORT).show();
-
+                showResult();
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -245,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
                 postRequest();
                 Toast.makeText(MainActivity.this,"POST Request successful din galerie", Toast.LENGTH_SHORT).show();
-
+                showResult();
             }
         }
     }
