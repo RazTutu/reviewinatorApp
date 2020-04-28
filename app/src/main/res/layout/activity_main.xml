@@ -89,6 +89,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="239dp"
+                android:layout_height="187dp"
+                android:layout_marginStart="38dp"
+                android:layout_marginTop="76dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

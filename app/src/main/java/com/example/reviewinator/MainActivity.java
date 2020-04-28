@@ -16,6 +16,8 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -64,6 +66,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+
 import org.apache.commons.text.StringEscapeUtils;
 
 
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     Button button, btnGallery;
-
+    ImageView imgview;
     String currentPhotoPath;
 
     @SuppressLint("RestrictedApi")
@@ -94,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-
+        imgview = findViewById(R.id.imageView);
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,19 +125,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void showResult(){
+    private void showResult() {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
-        intent.putExtra(EXTRA_TEXT,"Ana are mere.");
+        intent.putExtra(EXTRA_TEXT, "Ana are mere.");
         startActivity(intent);
     }
 
-    private void postRequest(String encodedImage){
+    private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
             String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
 //            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("encoding",encodedImage);
+            jsonBody.put("encoding", encodedImage);
 //            jsonBody.put("country", "MAXUT");
 //            jsonBody.put("city", "DELENI");
 //            jsonBody.put("plainCapacity", "69");
@@ -199,8 +202,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // mod nou- nu prea merge
+    public String encodeBitmap(Bitmap bitmap){
+        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+        byte[] byteFormat=stream.toByteArray();
+        String encodedImage=Base64.encodeToString(byteFormat,Base64.CRLF | Base64.NO_WRAP);
+        return encodedImage;
+    }
 
-    public String encodeImage(String photoPath){
+
+
+
+    public String encodeImage(String photoPath) {
         InputStream inputStream = null;//You can get an inputStream using any IO API
         try {
             inputStream = new FileInputStream(photoPath);
@@ -217,9 +231,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                output.close();
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
         bytes = output.toByteArray();
-        String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+//        String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
+        String encodedString = Base64.encodeToString(bytes, Base64.NO_WRAP);
         return encodedString;
     }
 
@@ -228,18 +251,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                Uri contentUri = Uri.fromFile(f);
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (bitmap.equals(null)) {
+                    Toast.makeText(MainActivity.this, "NU MERGE POZA", Toast.LENGTH_SHORT).show();
+                } else {
+//                    imgview.setImageBitmap(bitmap);
+                }
 
-
-                String encodedString=encodeImage(currentPhotoPath);
+                String encodedString = encodeBitmap(bitmap);
+//                String encodedString=encodeImage(currentPhotoPath);
+//                System.out.println(encodedString);
+                byte[] decodeString=Base64.decode(encodedString,Base64.DEFAULT);
+                Bitmap decoded= BitmapFactory.decodeByteArray(decodeString,0,decodeString.length);
+//                imgview.setImageBitmap(decoded);
+//                String encodedString=encodeImage(currentPhotoPath);
 
                 //debugging
-                int marime=encodedString.length();
-                Log.d("MARIME",Integer.toString(marime));
+//                int marime=encodedString.length();
+//                Log.d("MARIME",Integer.toString(marime));
+//                System.out.println(encodedString.substring(0,200));
 
-
-                postRequest(encodedString);
-                Toast.makeText(MainActivity.this,"POST Request successful din camera", Toast.LENGTH_SHORT).show();
-                showResult();
+//                postRequest(encodedString);
+                Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
+//                showResult();
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -250,8 +291,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
-               // postRequest();
-                Toast.makeText(MainActivity.this,"POST Request successful din galerie", Toast.LENGTH_SHORT).show();
+                // postRequest();
+                Toast.makeText(MainActivity.this, "POST Request successful din galerie", Toast.LENGTH_SHORT).show();
                 showResult();
             }
         }
