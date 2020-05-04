@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void showResult() {
+    private void showResult(String a) {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
-        intent.putExtra(EXTRA_TEXT, "Ana are mere.");
+        intent.putExtra(EXTRA_TEXT, a);
         startActivity(intent);
     }
 
@@ -145,9 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
 
-  //          String URL = "http://10.0.2.2:6969/test";
+            String URL = "http://10.0.2.2:6969/test";
   //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
@@ -161,7 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
-                    System.out.println(StringEscapeUtils.unescapeHtml4(response));
+                    System.out.println("varlan marlan");
+                 showResult(StringEscapeUtils.unescapeHtml4(response));
+                    System.out.println("frsinaru");
+
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -294,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                   postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
-                showResult();
+
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -308,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
                 // postRequest();
                 Toast.makeText(MainActivity.this, "POST Request successful din galerie", Toast.LENGTH_SHORT).show();
-                showResult();
+
             }
         }
     }
