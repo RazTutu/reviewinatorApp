@@ -4,19 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/final_background_image_final"
     android:scaleType="fitXY"
+    android:background="@drawable/final_background_image_final"
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="0dp"
         tools:openDrawer="end">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,77 +26,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/welcome_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="304dp"
-                android:layout_marginEnd="136dp"
+                android:layout_width="552dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="183dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="165dp"
                 android:fontFamily="@font/century_gothic"
-                android:text="Welcome to \nReviewinator"
+                android:text="        Welcome to \n       Reviewinator"
                 android:textColor="#FFFFFF"
-                android:textSize="35sp"
+                android:textSize="50sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.446"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="287dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginEnd="78dp"
+                android:layout_width="540dp"
+                android:layout_height="121dp"
+                android:layout_marginStart="210dp"
+                android:layout_marginTop="372dp"
+                android:layout_marginEnd="154dp"
+                android:layout_marginBottom="248dp"
                 android:fontFamily="@font/playfair_display"
                 android:text="Upload or take a photo of a book and get it's reviews and ratings."
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="36sp"
+                app:layout_constraintBottom_toTopOf="@+id/button"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.584"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+                app:layout_constraintTop_toBottomOf="@+id/welcome_text"
+                app:layout_constraintVertical_bias="0.645" />
 
             <Button
                 android:id="@+id/btnGallery"
-                android:layout_width="134dp"
-                android:layout_height="51dp"
+                android:layout_width="196dp"
+                android:layout_height="91dp"
                 android:layout_marginStart="44dp"
-                android:layout_marginTop="20dp"
 
-                android:layout_marginEnd="37dp"
+                android:layout_marginBottom="48dp"
                 android:width="163dp"
                 android:height="47dp"
                 android:background="#1CBEC8"
                 android:text="Gallery"
                 android:textColor="#FFFFFF"
-                app:layout_constraintEnd_toStartOf="@+id/button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="132dp"
-                android:layout_height="49dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="32dp"
+                android:layout_width="195dp"
+                android:layout_height="96dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="48dp"
                 android:width="163dp"
                 android:height="47dp"
                 android:background="#1CC88A"
                 android:text="Camera"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="221dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="76dp"
+                android:layout_width="220dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
