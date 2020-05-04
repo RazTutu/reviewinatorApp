@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     Button button, btnGallery;
-    ImageView imgview;
+//    ImageView imgview;
     String currentPhotoPath;
 
     @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-        imgview = findViewById(R.id.imageView);
+//        imgview = findViewById(R.id.imageView);
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                assert data != null;
                 Uri contentUri = data.getData();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);

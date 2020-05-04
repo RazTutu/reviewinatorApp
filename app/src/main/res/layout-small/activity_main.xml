@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scaleType="fitXY"
     android:background="@drawable/final_background_image_final"
+    android:scaleType="fitXY"
     tools:context=".MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:context=".MainActivity"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="16dp"
         tools:openDrawer="end">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,73 +34,62 @@
 
             <TextView
                 android:id="@+id/welcome_text"
-                android:layout_width="350dp"
-                android:layout_height="141dp"
-                android:layout_marginTop="76dp"
-                android:layout_marginEnd="228dp"
-                android:layout_marginBottom="144dp"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="57dp"
+                android:layout_marginEnd="40dp"
                 android:fontFamily="@font/century_gothic"
                 android:text="Welcome to \nReviewinator"
                 android:textColor="#FFFFFF"
-                android:textSize="50sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="576dp"
-                android:layout_height="121dp"
-                android:layout_marginStart="335dp"
-                android:layout_marginTop="396dp"
-                android:layout_marginEnd="334dp"
+                android:layout_width="142dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="29dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/playfair_display"
                 android:text="Upload or take a photo of a book and get it's reviews and ratings."
                 android:textColor="#FFFFFF"
-                android:textSize="34sp"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.45"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btnGallery"
-                android:layout_width="277dp"
-                android:layout_height="77dp"
+                android:layout_width="51dp"
+                android:layout_height="16dp"
 
-                android:layout_marginStart="88dp"
-                android:layout_marginBottom="76dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="9dp"
                 android:width="163dp"
                 android:height="47dp"
                 android:background="#1CBEC8"
                 android:text="Gallery"
                 android:textColor="#FFFFFF"
-                android:textSize="24sp"
+                android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="274dp"
-                android:layout_height="79dp"
-                android:layout_marginEnd="72dp"
-                android:layout_marginBottom="72dp"
+                android:layout_width="50dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
                 android:width="163dp"
                 android:height="47dp"
                 android:background="#1CC88A"
                 android:text="Camera"
-                android:textSize="24sp"
+                android:textSize="8sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="221dp"
-                android:layout_height="110dp"
-                android:layout_marginTop="240dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
