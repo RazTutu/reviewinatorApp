@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+
+
     }
 
     private void showResult() {
@@ -133,16 +136,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+    private void registerTransition(){
+        Intent intent = new Intent(this, com.example.reviewinator.result.class);
+        intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
+        startActivity(intent);
+    }
+
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
             String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-//            String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
+
+  //          String URL = "http://10.0.2.2:6969/test";
+  //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
-//            jsonBody.put("country", "MAXUT");
-//            jsonBody.put("city", "DELENI");
-//            jsonBody.put("plainCapacity", "69");
+            System.out.println(encodedImage);
+            //jsonBody.put("country", "MAXUT");
+            //jsonBody.put("city", "DELENI");
+            //jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -280,9 +292,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Log.d("MARIME",Integer.toString(marime));
 //                System.out.println(encodedString.substring(0,200));
 
-//                postRequest(encodedString);
+                  postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
-//                showResult();
+                showResult();
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
@@ -355,8 +367,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.login:
                 Toast.makeText(MainActivity.this, "Login Selected", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.register:
+            case R.id.registerButton:
                 Toast.makeText(MainActivity.this, "Register selected", Toast.LENGTH_SHORT).show();
+                registerTransition();
+                System.out.println("Text");
                 break;
             case R.id.history:
                 Toast.makeText(MainActivity.this, "History selected", Toast.LENGTH_SHORT).show();
