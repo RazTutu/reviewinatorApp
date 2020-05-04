@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawer);
@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
 
-
-
     }
 
     private void showResult(String a) {
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
-    private void registerTransition(){
+    private void registerTransition() {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
         intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
         startActivity(intent);
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
 
             String URL = "http://10.0.2.2:6969/test";
-  //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
+            //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
             System.out.println(encodedImage);
@@ -162,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
                     System.out.println("varlan marlan");
-                 showResult(StringEscapeUtils.unescapeHtml4(response));
+                    showResult(StringEscapeUtils.unescapeHtml4(response));
                     System.out.println("frsinaru");
 
                 }
@@ -219,16 +217,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // mod nou- nu prea merge
-    public String encodeBitmap(Bitmap bitmap){
-        ByteArrayOutputStream stream=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-        byte[] byteFormat=stream.toByteArray();
-        String encodedImage=Base64.encodeToString(byteFormat,Base64.CRLF | Base64.NO_WRAP);
+    // mod nou SI BUN
+    public String encodeBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteFormat = stream.toByteArray();
+        String encodedImage = Base64.encodeToString(byteFormat, Base64.CRLF | Base64.NO_WRAP);
         return encodedImage;
     }
-
-
 
 
     public String encodeImage(String photoPath) {
@@ -276,17 +272,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if (bitmap.equals(null)) {
-                    Toast.makeText(MainActivity.this, "NU MERGE POZA", Toast.LENGTH_SHORT).show();
-                } else {
-//                    imgview.setImageBitmap(bitmap);
-                }
 
+
+                assert bitmap != null;
                 String encodedString = encodeBitmap(bitmap);
 //                String encodedString=encodeImage(currentPhotoPath);
 //                System.out.println(encodedString);
-                byte[] decodeString=Base64.decode(encodedString,Base64.DEFAULT);
-                Bitmap decoded= BitmapFactory.decodeByteArray(decodeString,0,decodeString.length);
+
+                // decoding
+                byte[] decodeString = Base64.decode(encodedString, Base64.DEFAULT);
+                Bitmap decoded = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
 //                imgview.setImageBitmap(decoded);
 //                String encodedString=encodeImage(currentPhotoPath);
 
@@ -295,23 +290,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Log.d("MARIME",Integer.toString(marime));
 //                System.out.println(encodedString.substring(0,200));
 
-                  postRequest(encodedString);
+                postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
 
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 assert data != null;
-                Uri contentUri = data.getData();
+                Uri filePath = data.getData();
+                Bitmap bitmap = null;
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(filePath);
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+//                    imgview.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(contentUri);
+                String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(filePath);
                 Log.d("GALLERY", "onActivityResult: Gallery Image Uri: " + imageFileName);
+                String encodedString = encodeBitmap(bitmap);
+                byte[] decodeString = Base64.decode(encodedString, Base64.DEFAULT);
 
+                Bitmap decoded = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+//                imgview.setImageBitmap(decoded);
+//                Toast.makeText(MainActivity.this, "DECODE DIN GALERIE", Toast.LENGTH_SHORT).show();
 
-                // TODO: VAD CUM IAU PHOTOPATH DIN GALERIE PENTRU ENCODING
-                // postRequest();
+                postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din galerie", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
