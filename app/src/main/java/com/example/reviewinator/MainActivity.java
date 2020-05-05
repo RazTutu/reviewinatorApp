@@ -28,6 +28,7 @@ import android.provider.MediaStore;
 
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -128,15 +129,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void showResult(String a) {
-        Intent intent = new Intent(this, com.example.reviewinator.result.class);
-        intent.putExtra(EXTRA_TEXT, a);
+    public void open_register_activity(MenuItem item){
+        Toast.makeText(this, "Hello World", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, register_screen.class);
+        //intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
         startActivity(intent);
     }
 
-    private void registerTransition() {
+    private void showResult(String a) {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
-        intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
+        intent.putExtra(EXTRA_TEXT, a);
         startActivity(intent);
     }
 
@@ -378,7 +380,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.registerButton:
                 Toast.makeText(MainActivity.this, "Register selected", Toast.LENGTH_SHORT).show();
-                registerTransition();
                 System.out.println("Text");
                 break;
             case R.id.history:
@@ -386,6 +387,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.registerButton:
+                System.out.println("Register  pressed");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    public void local_history_action(MenuItem item){
+        Toast.makeText(MainActivity.this, "Local history selected", Toast.LENGTH_SHORT).show();
     }
 
 }
