@@ -410,4 +410,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
     }
 
+    public void local_history(MenuItem item){
+        Toast.makeText(MainActivity.this, "History selected", Toast.LENGTH_LONG).show();
+        System.out.println("Something");
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+    }
+
 }
