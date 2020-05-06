@@ -21,7 +21,7 @@
     <item
         android:id="@+id/local_history"
         android:title="Local History"
-        android:onClick="local_history_action"
+        android:onClick="local_history_activity"
         android:icon="@drawable/ic_history"
         />
 </menu>
