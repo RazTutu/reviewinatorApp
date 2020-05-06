@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.registerButton:
-                System.out.println("Register  pressed");
+                System.out.println("Register pressed");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -418,8 +418,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public void local_history_action(MenuItem item){
+    public void local_history_activity(MenuItem item){
         Toast.makeText(MainActivity.this, "Local history selected", Toast.LENGTH_SHORT).show();
+        System.out.println("Something");
+        Intent intent = new Intent(this, localHistoryScreen.class);
+        //intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
+        startActivity(intent);
+    }
+
+    public void local_history(MenuItem item){
+        Toast.makeText(MainActivity.this, "History selected", Toast.LENGTH_LONG).show();
+        System.out.println("Something");
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
     }
 
 }
