@@ -130,11 +130,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void open_register_activity(MenuItem item){
-        Toast.makeText(this, "Hello World", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, register_screen.class);
+        //Toast.makeText(this, "Hello World", Toast.LENGTH_LONG).show();
+        //Intent intent = new Intent(this, register_screen.class);
         //intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
-        startActivity(intent);
+        //startActivity(intent);
+        //Activity registerActiviy = new registerAction();
+        startActivityForResult(new Intent(getApplicationContext(),   register_screen.class), 999);
     }
+
+
 
     private void showResult(String a) {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
@@ -145,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+//            String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
 
             String URL = "http://10.0.2.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
@@ -320,6 +324,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din galerie", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+        switch(requestCode) {
+            case (999) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    // TODO Extract the data returned from the child Activity.
+                    String returnValue = data.getStringExtra("some_key");
+                    Toast.makeText(this, data.getStringExtra("message"), Toast.LENGTH_LONG).show();
+                }
+                break;
             }
         }
     }
