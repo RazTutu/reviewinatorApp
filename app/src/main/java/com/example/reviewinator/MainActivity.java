@@ -45,6 +45,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -149,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-//            String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
+            String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
 
-            String URL = "http://10.0.2.2:6969/test";
+            //String URL = "http://10.0.2.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
@@ -197,7 +198,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
             };
+            stringRequest.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {
+                    return 50000;
+                }
 
+                @Override
+                public int getCurrentRetryCount() {
+                    return 50000;
+                }
+
+                @Override
+                public void retry(VolleyError error) throws VolleyError {
+
+                }
+            });
             requestQueue.add(stringRequest);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -432,5 +448,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
     }
-
 }
