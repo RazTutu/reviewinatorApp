@@ -20,6 +20,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 
@@ -29,6 +30,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,6 +38,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import android.webkit.MimeTypeMap;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int CAMERA_PERM_CODE = 101;
     public static final int GALLERY_REQUEST_CODE = 105;
     public static final String EXTRA_TEXT = "com.example.reviewinator.EXTRA_TEXT";
+    public String registerResponse = "";
+    public String nickname = "";
+    Menu myMenu;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -139,6 +145,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(new Intent(getApplicationContext(),   register_screen.class), 999);
     }
 
+    public void logoutClicked(MenuItem item){
+
+
+        /*
+        Menu menu = navigationView.getMenu();
+
+        //invalidateOptionsMenu();
+        MenuItem login_item = menu.findItem(R.id.loginButton);
+        login_item.setVisible(true);
+
+
+        MenuItem register_item = menu.findItem(R.id.registerButton);
+        register_item.setVisible(true);
+
+        MenuItem local_history_item = menu.findItem(R.id.local_history);
+        local_history_item.setVisible(true);
+
+        MenuItem logout_item = menu.findItem(R.id.logout_item);
+        logout_item.setVisible(false);
+
+
+        Toast.makeText(this, "Logout  pressed.", Toast.LENGTH_SHORT).show();
+
+         */
+        //do a force restart
+
+        Intent intent = new Intent(this, MainActivity.class);
+        this.startActivity(intent);
+        this.finishAffinity();
+        nickname = "";
+    }
 
 
     private void showResult(String a) {
@@ -150,9 +187,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
-
-            //String URL = "http://10.0.2.2:6969/test";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
+            //String URL = "http://192.168.0.2:6969/test";
+            String URL = "http://10.0.2.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
@@ -166,9 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
-                    System.out.println("varlan marlan");
                     showResult(StringEscapeUtils.unescapeHtml4(response));
-                    System.out.println("frsinaru");
 
                 }
             }, new Response.ErrorListener() {
@@ -350,11 +385,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // TODO Extract the data returned from the child Activity.
                     String returnValue = data.getStringExtra("some_key");
                     Toast.makeText(this, data.getStringExtra("message"), Toast.LENGTH_LONG).show();
+                    //String response = data.getStringExtra("serverCode");
+                    registerResponse = data.getStringExtra("serverCode");
+                    nickname = data.getStringExtra("nickname");
+                    System.out.println("nickname is " + nickname);
+                    if(registerResponse.equals("1")){
+                        System.out.println(registerResponse);
+                        //hide register menu item
+                        //MenuItem item = findViewById(R.id.registerButton); //code crashes the app
+                        //item.setVisible(false); //code crashes the app
+                        Menu menu =navigationView.getMenu();
+                        MenuItem register_item = menu.findItem(R.id.registerButton);
+                        register_item.setVisible(false);
+
+                        MenuItem login_button = menu.findItem(R.id.loginButton);
+                        login_button.setVisible(false);
+
+                        MenuItem local_history = menu.findItem(R.id.local_history);
+                        local_history.setVisible(false);
+
+                        //uncomment after history implemented. Make sure that history visibility is  false in menu_item.xml
+                        //MenuItem history = menu.findItem(R.id.history);
+                        //history.setVisible(true);
+
+                        MenuItem logout = menu.findItem(R.id.logout_item);
+                        logout.setVisible(true);
+                    }
                 }
                 break;
             }
         }
     }
+
+
+
 
     private String getFileExt(Uri contentUri) {
         ContentResolver c = getContentResolver();
@@ -407,7 +471,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.login:
+            case R.id.loginButton:
                 Toast.makeText(MainActivity.this, "Login Selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.registerButton:
@@ -421,17 +485,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.registerButton:
-                System.out.println("Register pressed");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 
     public void local_history_activity(MenuItem item){
