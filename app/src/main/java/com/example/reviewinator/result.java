@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -40,7 +41,7 @@ public class result extends AppCompatActivity {
 
         TextView txtview = (TextView) findViewById(R.id.textView);
         txtview.setText(searchResult);
-
+        txtview.setMovementMethod(new ScrollingMovementMethod());
     }
 
 
