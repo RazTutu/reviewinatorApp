@@ -145,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(new Intent(getApplicationContext(),   register_screen.class), 999);
     }
 
+    public void open_login_activity(MenuItem item){
+        startActivityForResult(new Intent(getApplicationContext(), login_screen.class), 1000);
+    }
+
     public void logoutClicked(MenuItem item){
 
 
@@ -187,17 +191,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.0.2:6969/test";
             String URL = "http://10.0.2.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
-            System.out.println(encodedImage);
+            jsonBody.put("nickname", nickname);
+
             //jsonBody.put("country", "MAXUT");
             //jsonBody.put("city", "DELENI");
             //jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
+            System.out.println(requestBody);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
@@ -380,6 +386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         switch(requestCode) {
+            //user back to main from register
             case (999) : {
                 if (resultCode == Activity.RESULT_OK) {
                     // TODO Extract the data returned from the child Activity.
@@ -410,6 +417,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         MenuItem logout = menu.findItem(R.id.logout_item);
                         logout.setVisible(true);
+                    }
+                }
+                break;
+            }
+            //user back to main from login
+            case (1000) : {
+                System.out.println("back to main");
+                if(resultCode == Activity.RESULT_OK){
+                    registerResponse = data.getStringExtra("serverCode");
+                    nickname = data.getStringExtra("nickname");
+                    if(registerResponse.equals("1")){
+                        Menu menu = navigationView.getMenu();
+                        MenuItem register_item = menu.findItem(R.id.registerButton);
+                        register_item.setVisible(false);
+
+                        MenuItem login_button = menu.findItem(R.id.loginButton);
+                        login_button.setVisible(false);
+
+                        MenuItem local_history = menu.findItem(R.id.local_history);
+                        local_history.setVisible(false);
+
+                        //uncomment after history implemented. Make sure that history visibility is  false in menu_item.xml
+                        //MenuItem history = menu.findItem(R.id.history);
+                        //history.setVisible(true);
+
+                        MenuItem logout = menu.findItem(R.id.logout_item);
+                        logout.setVisible(true);
+
+                        Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
