@@ -28,7 +28,12 @@ public class result extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Search Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Intent intent = getIntent();
         String searchResult = intent.getStringExtra(MainActivity.EXTRA_TEXT);
@@ -38,9 +43,5 @@ public class result extends AppCompatActivity {
 
     }
 
-
-    public void back_to_main(View v){
-        finish();
-    }
 
 }
