@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button button, btnGallery;
 //    ImageView imgview;
     String currentPhotoPath;
+    String given_respose = "";
+    String given_respose1 = "";
+    String given_respose2 = "";
 
     @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
@@ -193,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "http://192.168.0.157:6969/test";
+            String URL = "http://192.168.56.1:6969/test";
             //String URL = "http://10.0.2.2:6969/test";
 
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
@@ -212,7 +215,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
                     showResult(StringEscapeUtils.unescapeHtml4(response));
-
+                    if(given_respose.equals("")) given_respose = response;
+                    else if(given_respose1.equals("")) given_respose1 = response;
+                    else given_respose2 = response;
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -526,11 +531,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void local_history_activity(MenuItem item){
-        Toast.makeText(MainActivity.this, "Local history selected", Toast.LENGTH_SHORT).show();
-        System.out.println("Something");
         Intent intent = new Intent(this, localHistoryScreen.class);
-        //intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
+        intent.putExtra("Value", given_respose);
+        intent.putExtra("Value1", given_respose1);
+        intent.putExtra("Value2", given_respose2);
+        System.out.println("----------------------------------------------------------------------------------------------");
         startActivity(intent);
+        //finish();
     }
 
     public void local_history(MenuItem item){
