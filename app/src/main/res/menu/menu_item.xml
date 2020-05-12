@@ -5,7 +5,6 @@
     <item
         android:id="@+id/loginButton"
         android:title="Login"
-        android:onClick="open_login_activity"
         android:icon="@drawable/ic_face"
         />
     <item

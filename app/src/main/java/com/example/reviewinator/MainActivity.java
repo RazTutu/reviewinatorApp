@@ -92,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Button button, btnGallery;
 //    ImageView imgview;
     String currentPhotoPath;
+    String given_respose = "";
+    String given_respose1 = "";
+    String given_respose2 = "";
 
     @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
@@ -145,10 +148,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivityForResult(new Intent(getApplicationContext(),   register_screen.class), 999);
     }
 
-    public void open_login_activity(MenuItem item){
-        startActivityForResult(new Intent(getApplicationContext(), login_screen.class), 1000);
-    }
-
     public void logoutClicked(MenuItem item){
 
 
@@ -191,28 +190,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void postRequest(String encodedImage) {
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "http://192.168.0.157:6969/test";
-            //String URL = "http://10.0.2.2:6969/test";
-
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
+            //String URL = "http://192.168.0.2:6969/test";
+            String URL = "http://192.168.56.1:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
-            jsonBody.put("nickname", nickname);
-
+            System.out.println(encodedImage);
             //jsonBody.put("country", "MAXUT");
             //jsonBody.put("city", "DELENI");
             //jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
-            System.out.println(requestBody);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
                     showResult(StringEscapeUtils.unescapeHtml4(response));
-
+                    if(given_respose.equals("")) given_respose = response;
+                    else if(given_respose1.equals("")) given_respose1 = response;
+                        else given_respose2 = response;
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -388,7 +385,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         switch(requestCode) {
-            //user back to main from register
             case (999) : {
                 if (resultCode == Activity.RESULT_OK) {
                     // TODO Extract the data returned from the child Activity.
@@ -419,35 +415,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                         MenuItem logout = menu.findItem(R.id.logout_item);
                         logout.setVisible(true);
-                    }
-                }
-                break;
-            }
-            //user back to main from login
-            case (1000) : {
-                System.out.println("back to main");
-                if(resultCode == Activity.RESULT_OK){
-                    registerResponse = data.getStringExtra("serverCode");
-                    nickname = data.getStringExtra("nickname");
-                    if(registerResponse.equals("1")){
-                        Menu menu = navigationView.getMenu();
-                        MenuItem register_item = menu.findItem(R.id.registerButton);
-                        register_item.setVisible(false);
-
-                        MenuItem login_button = menu.findItem(R.id.loginButton);
-                        login_button.setVisible(false);
-
-                        MenuItem local_history = menu.findItem(R.id.local_history);
-                        local_history.setVisible(false);
-
-                        //uncomment after history implemented. Make sure that history visibility is  false in menu_item.xml
-                        //MenuItem history = menu.findItem(R.id.history);
-                        //history.setVisible(true);
-
-                        MenuItem logout = menu.findItem(R.id.logout_item);
-                        logout.setVisible(true);
-
-                        Toast.makeText(this, "Logged in", Toast.LENGTH_LONG).show();
                     }
                 }
                 break;
@@ -524,13 +491,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     public void local_history_activity(MenuItem item){
-        Toast.makeText(MainActivity.this, "Local history selected", Toast.LENGTH_SHORT).show();
-        System.out.println("Something");
         Intent intent = new Intent(this, localHistoryScreen.class);
-        //intent.putExtra(EXTRA_TEXT, "Gone to register screen.");
+        intent.putExtra("Value", given_respose);
+        intent.putExtra("Value1", given_respose1);
+        intent.putExtra("Value2", given_respose2);
+        System.out.println("----------------------------------------------------------------------------------------------");
         startActivity(intent);
+        //finish();
     }
 
     public void local_history(MenuItem item){

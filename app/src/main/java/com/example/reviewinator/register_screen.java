@@ -54,7 +54,7 @@ public class register_screen extends AppCompatActivity {
 
         try{
             RequestQueue requestQueue = Volley.newRequestQueue(register_screen.this);
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/user/signup";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/getReviews";
             //String URL = "http://192.168.0.2:6969/test";
             String URL = "http://10.0.2.2:6969/test";
             //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
@@ -70,13 +70,10 @@ public class register_screen extends AppCompatActivity {
                 @Override
                 public void onResponse(String response) {
                     //Log.i("VOLLEY", response.toString());
-                    //System.out.println(response.toString());
+                    System.out.println(response.toString());
                     //response  needs to be extracted
-                    System.out.println("server response is "+ response.toString());
                     Intent i = new Intent();
                     i.putExtra("message", "You are logged in!");
-                    //response.toString is 1 if succes and 0 if false.
-                   // i.putExtra("serverCode", response.toString());
                     i.putExtra("serverCode", "1");
                     i.putExtra("nickname", nickname_string);
                     setResult(RESULT_OK, i);

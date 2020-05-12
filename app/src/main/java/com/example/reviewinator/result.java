@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,20 +28,19 @@ public class result extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Search Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         String searchResult = intent.getStringExtra(MainActivity.EXTRA_TEXT);
 
         TextView txtview = (TextView) findViewById(R.id.textView);
         txtview.setText(searchResult);
-        txtview.setMovementMethod(new ScrollingMovementMethod());
+
     }
 
+
+    public void back_to_main(View v){
+        finish();
+    }
 
 }
