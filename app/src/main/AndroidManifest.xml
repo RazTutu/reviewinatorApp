@@ -20,7 +20,9 @@
         <activity android:name=".register_screen"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".localHistoryScreen" />
-        <activity android:name=".History" />
+        <activity android:name=".History"
+            android:parentActivityName=".register_screen"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

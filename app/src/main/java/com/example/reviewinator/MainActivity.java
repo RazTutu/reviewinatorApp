@@ -512,6 +512,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.history:
                 Toast.makeText(MainActivity.this, "History selected", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, History.class);
+                startActivity(i);
                 break;
         }
         return false;
