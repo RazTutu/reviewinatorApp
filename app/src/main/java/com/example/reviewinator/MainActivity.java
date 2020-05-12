@@ -14,6 +14,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -60,10 +61,13 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
 import java.io.File;
@@ -94,6 +98,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String given_respose = "";
     String given_respose1 = "";
     String given_respose2 = "";
+    String filename = "saveFile1.txt";
+
+    public void readFile() throws FileNotFoundException {
+        File file = new File(this.getFilesDir(), filename);
+        FileInputStream fis = this.openFileInput(filename);
+        //boolean deleted = file.delete();
+        InputStreamReader inputStreamReader =
+                new InputStreamReader(fis, StandardCharsets.UTF_8);
+        try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            String line = reader.readLine();
+            while (line != null) {
+                if(given_respose.equals("")) given_respose = line;
+                else if(given_respose1.equals("")) given_respose1 = line;
+                else if (given_respose2.equals(""))given_respose2 = line;
+                else{
+                    given_respose2 = given_respose1;
+                    given_respose1 = given_respose;
+                    given_respose = line;
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            // Error occurred when opening raw file for reading.
+        }
+    }
 
     @SuppressLint({"RestrictedApi", "SourceLockedOrientationActivity"})
     @Override
@@ -109,7 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-
+        try {
+            readFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "http://192.168.0.157:6969/test";
+            String URL = "http://192.168.43.229:200/test";
             //String URL = "http://10.0.2.2:6969/test";
 
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
@@ -214,7 +247,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     showResult(StringEscapeUtils.unescapeHtml4(response));
                     if(given_respose.equals("")) given_respose = response;
                     else if(given_respose1.equals("")) given_respose1 = response;
-                    else given_respose2 = response;
+                    else if (given_respose2.equals(""))given_respose2 = response;
+                    else{
+                        given_respose2 = given_respose1;
+                        given_respose1 = given_respose;
+                        given_respose = response;
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -496,5 +534,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         System.out.println("Something");
         Intent intent = new Intent(this, History.class);
         startActivity(intent);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        try
+        {
+            OutputStreamWriter fout= new OutputStreamWriter(openFileOutput(filename, Context.MODE_PRIVATE));
+            fout.append(given_respose);
+            fout.append("\n");
+            fout.append(given_respose1);
+            fout.append("\n");
+            fout.append(given_respose2);
+            fout.append("\n");
+            fout.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

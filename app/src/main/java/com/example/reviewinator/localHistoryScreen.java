@@ -1,6 +1,7 @@
 package com.example.reviewinator;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,5 +30,9 @@ public class localHistoryScreen extends AppCompatActivity {
         localHistoryString3 = Objects.requireNonNull(getIntent().getExtras()).getString("Value2");
         assert localHistoryString3 != null;
         if(!localHistoryString3.equals(""))textView3.setText(localHistoryString3);
+    }
+
+    public void  backToMain(View v){
+        finish();
     }
 }
