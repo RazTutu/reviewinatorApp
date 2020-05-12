@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     Button button, btnGallery;
-//    ImageView imgview;
     String currentPhotoPath;
     String given_respose = "";
     String given_respose1 = "";
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         button = findViewById(R.id.button);
         btnGallery = findViewById(R.id.btnGallery);
-//        imgview = findViewById(R.id.imageView);
 
         btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"Camera selected",Toast.LENGTH_SHORT).show();
                 askCameraPermission();
             }
         });
@@ -297,37 +294,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public String encodeImage(String photoPath) {
-        InputStream inputStream = null;//You can get an inputStream using any IO API
-        try {
-            inputStream = new FileInputStream(photoPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        byte[] bytes;
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        try {
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                output.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                output.close();
-                inputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
-        bytes = output.toByteArray();
-//        String encodedString = Base64.encodeToString(bytes, Base64.DEFAULT);
-        String encodedString = Base64.encodeToString(bytes, Base64.NO_WRAP);
-        return encodedString;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -346,19 +313,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 assert bitmap != null;
                 String encodedString = encodeBitmap(bitmap);
-//                String encodedString=encodeImage(currentPhotoPath);
-//                System.out.println(encodedString);
 
-                // decoding
                 byte[] decodeString = Base64.decode(encodedString, Base64.DEFAULT);
                 Bitmap decoded = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
-//                imgview.setImageBitmap(decoded);
-//                String encodedString=encodeImage(currentPhotoPath);
-
-                //debugging
-//                int marime=encodedString.length();
-//                Log.d("MARIME",Integer.toString(marime));
-//                System.out.println(encodedString.substring(0,200));
 
                 postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
@@ -372,7 +329,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(filePath);
                     bitmap = BitmapFactory.decodeStream(inputStream);
-//                    imgview.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -380,11 +336,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String imageFileName = "JPEG_" + timeStamp + "." + getFileExt(filePath);
                 Log.d("GALLERY", "onActivityResult: Gallery Image Uri: " + imageFileName);
                 String encodedString = encodeBitmap(bitmap);
-                byte[] decodeString = Base64.decode(encodedString, Base64.DEFAULT);
-
-                Bitmap decoded = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
-//                imgview.setImageBitmap(decoded);
-//                Toast.makeText(MainActivity.this, "DECODE DIN GALERIE", Toast.LENGTH_SHORT).show();
 
                 postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din galerie", Toast.LENGTH_SHORT).show();
