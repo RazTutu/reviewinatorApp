@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "http://192.168.56.1:6969/test";
+            String URL = "http://192.168.0.157:6969/test";
             //String URL = "http://10.0.2.2:6969/test";
 
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
