@@ -225,10 +225,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
-            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
-            String URL = "http://192.168.43.229:200/test";
+            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+            //String URL = "http://192.168.43.229:200/test";
             //String URL = "http://10.0.2.2:6969/test";
-
+            //String URL = "http://192.168.0.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
