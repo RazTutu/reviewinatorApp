@@ -52,15 +52,24 @@ public class result extends AppCompatActivity {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             JSONObject jsonObject = new JSONObject(intent.getStringExtra(MainActivity.EXTRA_TEXT));
-            stringBuilder.append("Overall Rating: "+jsonObject.getString("overall_rating")+"\n\n\n\n");
-            JSONArray array = jsonObject.getJSONArray("reviews");
-            for (int i=0;i<array.length();i++) {
+            //stringBuilder.append("Overall Rating: "+jsonObject.getString("overall_rating")+"\n\n\n\n");
 
-                stringBuilder.append(array.getJSONObject(i).getString("author")+"\n\n");
-                stringBuilder.append("Rating: " + array.getJSONObject(i).getString("rating")+"\n");
-                stringBuilder.append("Review: "+array.getJSONObject(i).getString("description")+"\n\n\n");
+           if(!jsonObject.has("mesajEroare")) {
 
-            }
+               JSONArray array = jsonObject.getJSONArray("reviews");
+               for (int i = 0; i < array.length(); i++) {
+
+                   stringBuilder.append(array.getJSONObject(i).getString("author") + "\n\n");
+                   stringBuilder.append("Rating: " + array.getJSONObject(i).getString("rating") + "\n");
+                   stringBuilder.append("Review: " + array.getJSONObject(i).getString("description") + "\n\n\n");
+
+               }
+           } else {
+               stringBuilder.append(jsonObject.getString("mesajEroare") + "\n\n");
+               stringBuilder.append(jsonObject.getString("responseCode") + "\n\n");
+           }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
