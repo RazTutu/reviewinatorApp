@@ -5,13 +5,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-    <TextView
-        android:id="@+id/historyTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="No History yet."
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="272dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    />

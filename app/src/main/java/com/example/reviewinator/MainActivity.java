@@ -225,10 +225,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
-            String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
+            //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.43.229:200/test";
             //String URL = "http://10.0.2.2:6969/test";
-            //String URL = "http://192.168.0.2:6969/test";
+            String URL = "http://192.168.0.2:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
@@ -531,10 +531,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //finish();
     }
 
-    public void local_history(MenuItem item){
+    public void open_history(MenuItem item){
         Toast.makeText(MainActivity.this, "History selected", Toast.LENGTH_LONG).show();
-        System.out.println("Something");
         Intent intent = new Intent(this, History.class);
+        intent.putExtra("nickname", nickname);
         startActivity(intent);
     }
 
