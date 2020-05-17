@@ -8,20 +8,6 @@
     android:background="@color/cardview_dark_background"
     >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/century_gothic"
-        android:layout_below="@id/toolbarForBack"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarForBack" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarForBack"
@@ -36,8 +22,15 @@
         app:layout_collapseMode="pin"
         app:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        />
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView" android:padding="4dp"
+        android:scrollbars="vertical"
+        android:background="@color/cardview_dark_background"
+        android:layout_below="@id/toolbarForBack"
         />
 
 

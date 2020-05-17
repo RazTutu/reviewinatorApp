@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cardview_dark_background"
+        android:padding="4dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/author"
+            android:text="Adriano Cristian"
+            android:textSize="20dp"
+            android:textColor="#b3b3b3"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rating"
+            android:text="Rating: 5"
+            android:textSize="20dp"
+            android:layout_marginTop="1dp"
+            android:textColor="#e6e6e6"
+            android:layout_below="@+id/author"
+            />
+<!--
+        <com.ms.square.android.expandabletextview.ExpandableTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rating"
+            android:id="@+id/expandable_text_view"
+            app:maxCollapsedLines="4"
+            app:animDuration="50"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply mmy text of the printing and typesettiy. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textSize="20dp"
+                android:textColor="#e6e6e6"
+                android:id="@+id/expandable_text"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:background="@android:color/transparent"
+                android:id="@+id/expand_collapse"
+                />
+        </com.ms.square.android.expandabletextview.ExpandableTextView>
+        -->
+        <com.example.reviewinator.EpiText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rating"
+            android:id="@+id/review"
+            android:text="Lorem Ipsum is simply mmy text of the printing and typesettiy. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+            android:textSize="20dp"
+            android:textColor="#e6e6e6"
+            android:layout_marginTop="2dp"
+            />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
