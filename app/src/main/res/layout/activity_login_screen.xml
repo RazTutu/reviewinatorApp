@@ -4,26 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8288e0"
+    android:background="@drawable/register_background3"
     tools:context=".login_screen">
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:background="#2FB43F"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="299dp"
+        android:background="#CACDCA"
         android:onClick="back_to_main"
         android:text="Go Home"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nickname_field"
-        android:layout_width="202dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="105dp"
         android:backgroundTint="@color/alb"
         android:ems="10"
         android:hint="Nickname"
@@ -33,15 +37,17 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_field"
-        android:layout_width="202dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="105dp"
         android:backgroundTint="@color/alb"
         android:ems="10"
         android:hint="Password"
@@ -50,23 +56,24 @@
         android:textColorHighlight="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nickname_field" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="132dp"
+        android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="140dp"
         android:width="163dp"
         android:height="47dp"
-        android:background="#2FB43F"
+        android:background="#CACDCA"
         android:gravity="center"
         android:onClick="login_pressed"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_field" />
 </androidx.constraintlayout.widget.ConstraintLayout>

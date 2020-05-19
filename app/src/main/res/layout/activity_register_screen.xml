@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8288e0"
+    android:background="@drawable/register_background3"
     tools:context=".register_screen">
 
     <Button
@@ -12,9 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:background="#2FB43F"
-        android:onClick="backToMain"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
 
+        android:background="#CACDCA"
+        android:onClick="backToMain"
         android:text="GO home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +118,7 @@
         android:layout_width="117dp"
         android:layout_height="49dp"
         android:layout_marginTop="68dp"
-        android:background="#2FB43F"
+        android:background="#CACDCA"
         android:onClick="sendToMain"
         android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
