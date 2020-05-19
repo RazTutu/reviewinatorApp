@@ -50,6 +50,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -78,6 +79,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.text.StringEscapeUtils;
+import org.w3c.dom.ls.LSOutput;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String given_respose1 = "";
     String given_respose2 = "";
     String filename = "saveFile1.txt";
+    String raspuns;
 
     public void readFile() throws FileNotFoundException {
         File file = new File(this.getFilesDir(), filename);
@@ -215,36 +218,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void showResult(String a) {
+    private void showResult(String a ) {
         Intent intent = new Intent(this, com.example.reviewinator.result.class);
-        intent.putExtra(EXTRA_TEXT, a);
+        intent.putExtra("raspuns", a);
+        intent.putExtra("nume",  nickname);
         startActivity(intent);
     }
 
     private void postRequest(String encodedImage) {
         try {
+            System.out.println("am intrat in porstReq");
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.43.229:200/test";
-            //String URL = "http://10.0.2.2:6969/test";
-            String URL = "http://192.168.0.157:6969/test";
+           // String URL = "http://10.0.2.2:6969/test";
+           String URL = "https://reviewnator-server.herokuapp.com/test";
+            //String URL ="http://reviewinatorserver.chickenkiller.com:6969/test";
+            //String URL = "http://192.168.0.157:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", encodedImage);
-            jsonBody.put("nickname", nickname);
+            jsonBody.put("isbn", "");
+           jsonBody.put("nickname", nickname);
 
             //jsonBody.put("country", "MAXUT");
             //jsonBody.put("city", "DELENI");
             //jsonBody.put("plainCapacity", "69");
             final String requestBody = jsonBody.toString();
             System.out.println(requestBody);
-
+            System.out.println("am printat requestul in main");
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    //Log.i("VOLLEY", response.toString());
+                    System.out.println("am primit raspuns de la server"+response);
+                   // Log.i("VOLLEY", response.toString());
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     showResult(StringEscapeUtils.unescapeHtml4(response));
+                   // System.out.println("given este "+given_respose);
+                    raspuns = response;
                     if(given_respose.equals("")) given_respose = response;
                     else if(given_respose1.equals("")) given_respose1 = response;
                     else if (given_respose2.equals(""))given_respose2 = response;
@@ -257,7 +269,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.e("VOLLEY", error.toString());
+                  System.out.println("am intrat aici si acum ma pregatesc sa trimit catre rezult");
+                    showResult(error.getMessage());
                 }
             }) {
                 @Override
@@ -267,16 +280,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 @Override
                 public byte[] getBody() throws AuthFailureError {
-                    return requestBody == null ? null : requestBody.getBytes(StandardCharsets.UTF_8);
+
+
+                    System.out.println("abababavbabaadasdfasdl;gasgl;sngl;jksanfl;kSANVLK;SDANFJL;SDBVlVMs");
+                    //String aux = new String(requestBody.getBytes(StandardCharsets.UTF_8));
+                    //System.out.println("Bite array                          "+aux);
+                    if(requestBody== null)
+                    {
+                        System.out.println("sunt aci ma");
+                        String err="eroare";
+                       // showResult(err);
+                        return null;
+                    }
+                    else
+                    {
+                        System.out.println("intra in else       ");
+                        return requestBody.getBytes(StandardCharsets.UTF_8);
+                    }
+
                 }
 
                 @Override
                 protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    System.out.println( "ba sunt la buba                            ");
                     String responseString = "";
                     if (response != null) {
                         responseString = new String(response.data);
                     }
                     assert response != null;
+
                     return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
 
@@ -294,6 +326,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 @Override
                 public void retry(VolleyError error) throws VolleyError {
+                    //System.out.println(res);
+                    try {
+                        String aux=(new String(error.networkResponse.data,"utf-8"));
+                        throw new VolleyError(aux);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+
 
                 }
             });
@@ -357,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 postRequest(encodedString);
                 Toast.makeText(MainActivity.this, "POST Request successful din camera", Toast.LENGTH_SHORT).show();
-
+                System.out.println("am trecut pe aici");
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
