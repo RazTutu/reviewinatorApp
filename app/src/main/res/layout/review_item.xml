@@ -30,32 +30,33 @@
             android:textColor="#e6e6e6"
             android:layout_below="@+id/author"
             />
-<!--
-        <com.ms.square.android.expandabletextview.ExpandableTextView
-            android:layout_width="wrap_content"
+
+         <com.ms.square.android.expandabletextview.ExpandableTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_below="@id/rating"
+        android:layout_height="wrap_content"
+        android:id="@+id/expand_text_view"
+        expandableTextView:maxCollapsedLines="3"
+        expandableTextView:animDuration="200">
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rating"
-            android:id="@+id/expandable_text_view"
-            app:maxCollapsedLines="4"
-            app:animDuration="50"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lorem Ipsum is simply mmy text of the printing and typesettiy. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                android:textSize="20dp"
-                android:textColor="#e6e6e6"
-                android:id="@+id/expandable_text"
-                />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:background="@android:color/transparent"
-                android:id="@+id/expand_collapse"
-                />
-        </com.ms.square.android.expandabletextview.ExpandableTextView>
-        -->
+            android:id="@+id/expandable_text"
+            android:textSize="20dp"
+            android:textColor="#e6e6e6"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expand_collapse"
+            android:layout_gravity="bottom|right"
+            android:padding="16dp"
+            android:background="@android:color/transparent"/>
+
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+        <!--
         <com.example.reviewinator.EpiText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +67,7 @@
             android:textColor="#e6e6e6"
             android:layout_marginTop="2dp"
             />
-
+-->
 
     </RelativeLayout>
 
