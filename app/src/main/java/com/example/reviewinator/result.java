@@ -81,8 +81,20 @@ public class result extends AppCompatActivity {
 
 
         try {
+            JSONObject jsonObject;
+            String test = "";
+            String raspunsString = intent.getStringExtra("raspuns");
 
-             JSONObject jsonObject = new JSONObject(intent.getStringExtra("raspuns"));
+            if(raspunsString == null){
+                test = "mesajEroare";
+                jsonObject = new JSONObject();
+                jsonObject.put("mesajEroare", "mesajEroare");
+            } else {
+                test = intent.getStringExtra("raspuns");
+                jsonObject = new JSONObject(test);
+            }
+
+
             nickname=intent.getStringExtra("nume");
             //poate o sa adaugam un overall_rating on top of all reviews
             /*if(jsonObject.getString("overall_rating").equals("")){
@@ -158,7 +170,7 @@ public class result extends AppCompatActivity {
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/user/login";
             // String URL = "http://192.168.0.2:6969/test";
            // String URL = "http://10.0.2.2:6969/test";
-            String URL = "https://reviewnator-server.herokuapp.com/test";
+            String URL = "https://reviewnator-server-last.herokuapp.com/test";
             //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("encoding", "");

@@ -56,7 +56,7 @@ public class register_screen extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(register_screen.this);
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/user/signup";
             //String URL = "http://192.168.0.2:6969/test";
-            String URL = "https://reviewnator-server.herokuapp.com/user/signup";
+            String URL = "https://reviewnator-server-last.herokuapp.com/user/signup";
             //String URL = "http://192.168.0.2:6969/test";
             //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();

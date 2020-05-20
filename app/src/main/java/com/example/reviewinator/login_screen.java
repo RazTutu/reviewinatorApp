@@ -46,7 +46,7 @@ public class login_screen extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(login_screen.this);
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/user/login";
             //String URL = "http://192.168.0.2:6969/test";
-            String URL = "https://reviewnator-server.herokuapp.com/user/login";
+            String URL = "https://reviewnator-server-last.herokuapp.com/user/login";
             //String URL = "http://10.0.2.2:6969/test";
             //String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
             JSONObject jsonBody = new JSONObject();

@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //String URL = "http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.43.229:200/test";
            // String URL = "http://10.0.2.2:6969/test";
-           String URL = "https://reviewnator-server.herokuapp.com/test";
+           String URL = "https://reviewnator-server-last.herokuapp.com/test";
             //String URL ="http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.0.157:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
