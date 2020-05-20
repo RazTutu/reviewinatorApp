@@ -20,14 +20,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public static class ReviewViewHolder extends RecyclerView.ViewHolder{
         private TextView author;
         private TextView rating;
-        private com.example.reviewinator.EpiText review;
-        //private ExpandableTextView review
+        //private com.example.reviewinator.EpiText review;
+        private ExpandableTextView review;
 
         public ReviewViewHolder(@NonNull View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.author);
             rating = itemView.findViewById(R.id.rating);
-            review = itemView.findViewById(R.id.review);
+            review = itemView.findViewById(R.id.expand_text_view);
         }
     }
 
