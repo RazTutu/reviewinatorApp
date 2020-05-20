@@ -234,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //String URL = "http://192.168.43.229:200/test";
            // String URL = "http://10.0.2.2:6969/test";
            String URL = "https://reviewnator-server-last.herokuapp.com/test";
+
             //String URL ="http://reviewinatorserver.chickenkiller.com:6969/test";
             //String URL = "http://192.168.0.157:6969/test";
             //          String URL = "https://reviewnator-api.herokuapp.com/api/v1/airports";
@@ -450,8 +451,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         local_history.setVisible(false);
 
                         //uncomment after history implemented. Make sure that history visibility is  false in menu_item.xml
-                        //MenuItem history = menu.findItem(R.id.history);
-                        //history.setVisible(true);
+                        MenuItem history = menu.findItem(R.id.history);
+                        history.setVisible(true);
 
                         MenuItem logout = menu.findItem(R.id.logout_item);
                         logout.setVisible(true);
