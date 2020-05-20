@@ -3,7 +3,6 @@
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
     <string name="post_request">POST_REQUEST</string>
-
     <string name="no_data_available">No data to show, please take some pictures :)</string>
     <string name="last_review">Last review: </string>
     <string name="more_cached_reviews">More cached reviews: </string>

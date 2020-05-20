@@ -258,9 +258,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                    // System.out.println("given este "+given_respose);
                     raspuns = response;
                     if(!response.contains("mesajEroare")) {
-                        if (given_respose.equals("")) given_respose = response;
+                        if (given_respose2.equals("")) given_respose2 = response;
                         else if (given_respose1.equals("")) given_respose1 = response;
-                        else if (given_respose2.equals("")) given_respose2 = response;
+                        else if (given_respose.equals("")) given_respose = response;
                         else {
                             given_respose2 = given_respose1;
                             given_respose1 = given_respose;
